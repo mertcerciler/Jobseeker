@@ -1,0 +1,57 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+  
+     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+		{% include 'partials/alerts.html' %}
+        <form class="example" action="{% url 'apply' %}" method="POST">
+				{% csrf_token %} 
+				
+			<input type="text" placeholder="Search.." name="search">
+			<button name="applybutton" 	value="applybutton" type="submit"><i class="fa fa-search"></i></button>
+			<button name="sortbutton" style="margin-left: 60px; margin-bottom: 20px" value="sortbutton" type=submit>Sort</button>
+			<button name="maxbutton" style="margin-left: 60px; margin-bottom: 20px" value="maxbutton" type="submit">Max</button>
+		</form>
+        <style type="text/css">
+            .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+            .tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:center;}
+            .tftable tr {background-color:#ffffff;}
+            .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+            .tftable tr:hover {background-color:#ffff99;}
+        </style>
+            
+        <table class="tftable" border="1">
+            <tr><th>#</th><th>Company Name</th><th>Position</th><th>Salary</th><th>Description</th><th>Advertising Date</th><th>Closing Date</th></tr>
+            {% if offering %}
+		{% for offering1 in offering %}
+		<tr>
+			<td>{{ offering1.id }}</td>
+			<td>{{ offering1.company_name }} </td>	
+			<td>{{ offering1.position }}</td>
+			<td>{{ offering1.salary }}</td>
+			<td>{{ offering1.description }}</td>
+			<td>{{ offering1.advertising_date }}</td>
+			<td>{{ offering1.closing_date }}</td>
+			
+		</tr>	
+		{% endfor %}
+	{% else %}
+	<tr>
+		<td>There is no available offering</td>
+	</tr>
+	{% endif %}
+		</table>
+		<form action="{% url 'apply' %}" method="POST">
+				{% csrf_token %}
+		<select name="request" style="margin-left: 20px;margin-top: 30px; width: 250px;">
+				{% if offering %}
+				{% for offering in offering %}
+				<option>{{ forloop.counter }}</option>
+				{% endfor %}
+				{% endif %}
+			   </select>
+		<button name="apply" class="button-menu" value="requestbutton">APPLY</button>
+	</form>
+    {% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<a href="../"><button class="button-menu">Home Page</button></a>
+<div id= "login-form"  style="display: block;margin-left: 600px; height: 720px; text-align:center">
+        <ul class="list">
+            <li><img src="{% static 'img/joker2.jpg' %}" class="joker-img2"></li>
+            <li><h1 style="color: red;">Member Login</h1></li>
+            <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %} 
+                <!-- Alerts -->
+                {% include 'partials/alerts.html' %}
+                <select name="user_type">
+                    <option value="Admin">Admin</option>
+                    <option value="HR">HR</option>
+                    <option value="Employee">Employee</option>
+                    <option value="JobSeeker">JobSeeker</option>
+                </select> 
+            <li><input type="text" name="username" placeholder="User Name"></li>
+            <li><input type="text" name="password" placeholder="password"></li>
+            <li><button class="button-menu" id="admin" name="Submit" value="Submit">Submit</li></button>
+            <li>Forget Password?</li>
+        </form>
+        </ul>
+</div>	
+<script>
+    function goto(){
+        document.getElementById("admin").href = "../pages/";
+    }
+</script>
+{% endblock %}

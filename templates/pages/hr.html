@@ -1,0 +1,118 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+    <img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+    
+    <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %} 
+    <button class="button-logout" href="index.html">Logout</button>
+</form>
+
+    <br>
+    <button class="button-menu" onmousedown="editProfile()">Edit Profile</button>
+    <button class="button-menu" onmousedown="postJob()">Post Job</button>
+    <button class="button-menu" onmousedown="reviewComment()">Review Comment</button>
+
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+<hr>
+
+<div id="edit-Profile">
+    <form action="{% url 'postjob' %}" method="POST">
+            {% csrf_token %} 
+    <div id= "login-form" style="margin-top: 50px">
+        <ul class="list">
+            <li><input type="text" name="Password" placeholder="{{ edit_password }}"></li>
+            <li><input type="text" name="Name" placeholder="{{ edit_name }}"></li>
+            <li><input type="text" name="Apartment_no" placeholder="{{ edit_apartmentno }}"></li>
+            <li><input type="text" name="City" placeholder="{{ edit_city }}"></li>
+            <li><input type="text" name="Street" placeholder="{{ edit_street }}"></li>
+        </ul>
+    </div>
+
+    <div id= "login-form2">
+        <ul class="list">
+            <li><input type="text" name="Company Name" placeholder="{{ edit_companyname }}"></li>
+            <li><input type="text" name="E-Mail" placeholder="{{ edit_email }}"></li>
+            <li><input type="text" name="Age" placeholder="{{ edit_age }}"></li>
+            <li><button name="Update" value="UPDATE">UPDATE</button></li>
+        </ul>
+    </div>
+</div>
+</form>
+<form action="{% url 'postjob' %}" method="POST">
+        {% csrf_token %} 
+<div id="postJob">
+    <div id= "post-form">
+        <ul class="list">
+            <li><input type="text" name="Name" placeholder="Name"></li>
+            <li><input type="text" name="Position" placeholder="Position"></li>
+            <li><input type="text" name="Salary" placeholder="Salary"></li>
+            <li><input type="text" name="Description" placeholder="Description"></li>
+            <li><input type="text" name="Advertising Date" placeholder="Advertising Date"></li>
+            <li><input type="text" name="Closing Date" placeholder="Closing Date"></li>
+            <li><button class="button-menu" name="Post" value="Post">Post</button></li>
+        </ul>
+    </div>
+</div>
+</form>
+<div id="reviewComment">
+        <style type="text/css">
+            .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+            .tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:center;}
+            .tftable tr {background-color:#ffffff;}
+            .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+            .tftable tr:hover {background-color:#ffff99;}
+        </style>
+        
+                
+        <table class="tftable" border="1">
+            <tr><th>#</th> <th>Company Name</th><th>Username</th><th>Date- Time</th><th>Work Experience</th><th>Interview Experience</th><th>Company Pros</th><th>Company Cons</th></tr>
+            {% if all_comments %}
+            {%for comment in all_comments%} 
+            <tr><td>{{forloop.counter}}</td><td>{{comment.comp_name }} </td><td> {{comment.date }}</td><td>{{comment.time }} </td><td>{{comment.work_experience}} </td><td>{{comment.interview_process}} </td><td>{{comment.company_pros}} </td><td>{{comment.company_cons }}</td></tr>
+            
+            {% endfor %}
+            {%else %}
+            <tr><td>There is no comment available</td></tr>
+            {% endif %}
+        </table>
+        <form action="{% url 'postjob' %}" method="POST">
+                {% csrf_token %} 
+        <select name="request" style="margin-left: 20px;margin-top: 30px; width: 250px;">
+         {% if all_comments %}
+         {% for comment in all_comments %}
+         <option>{{ forloop.counter }}</option>
+         {% endfor %}
+         {% endif %}
+        </select>
+        <button name="requestbutton" class="button-menu" value="requestbutton">REQUEST</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+	function editProfile() {
+		document.getElementById("edit-Profile").style.display = "block";
+		document.getElementById("postJob").style.display = "none";
+		document.getElementById("reviewComment").style.display = "none";
+	}
+	function postJob(){
+		document.getElementById("edit-Profile").style.display = "none";
+		document.getElementById("postJob").style.display = "block";
+		document.getElementById("reviewComment").style.display = "none";
+	}
+	function reviewComment(){
+		document.getElementById("edit-Profile").style.display = "none";
+		document.getElementById("postJob").style.display = "none";
+		document.getElementById("reviewComment").style.display = "block";
+    }
+    function label(k, i){
+        document.getElementById('req-' + k).Id = k;
+        console.log(document.getElementById('req-' + k).Id);
+        console.log(i);
+    }
+</script>
+
+{% endblock %}

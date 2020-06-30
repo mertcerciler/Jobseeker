@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Main css -->
+    <link rel="stylesheet"  href="{% static 'css/database.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/AdminPage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/EditProfileEmployee.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/employee.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/message.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hr.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ReviewCommentHR.css' %}">
+    
+    <title>JOKERS</title>
+</head>
+<body>
+    {% block content %} {% endblock %}
+    <script src="{%static 'js/database.js' %} "></script>
+    <script src="{%static 'js/bootstrap.bundle.min.js' %} "></script>
+    <script src="{%static 'js/jquery-3.3.1.min.js' %} "></script>
+    <script src="{%static 'js/lightbox.min.js' %} "></script>
+    <script src="{%static 'js/main.js' %} "></script>
+   
+</body>
+</html>

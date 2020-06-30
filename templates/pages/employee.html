@@ -1,0 +1,133 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+
+    <img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+    <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %} 
+    <button class="button-logout" href="index.html">Logout</button>
+</form>
+    <br>
+    <button class="button-menu" onmousedown="editProfile()">Edit Profile</button>
+    <button class="button-menu" onmousedown="seeComments()">See Comments</button>
+    <button class="button-menu" onmousedown="makeComment()">Make Comment</button>
+    <a href="apply2"><button class="button-menu" onmousedown="apply()"> Apply</button></a>
+
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+<hr>
+
+<div id="edit-Profile">
+    <div id= "login-form">
+        <ul class="list">
+        <form action="{% url 'employee' %}" method="POST">
+            {%csrf_token%}
+            <li><input type="text" name="Password" placeholder="Password"></li>
+            <li><input type="text" name="Name" placeholder="Name"></li>
+            <li><input type="text" name="Apartment_no" placeholder="Apartment_no"></li>
+            <li><input type="text" name="Street" placeholder="Street"></li>
+            <li><input type="text" name="City" placeholder="City"></li>
+        </ul>
+    </div>
+
+    <div id= "login-form2">
+        <ul class="list">
+            {%if logged_employees%}
+                {% for logged_employee in logged_employees%}
+                    {%if logged_employee.user_type == 'Employee'%}
+            <li><input type="text" name="Position" placeholder="Position"></li>
+            <li><input type="text" name="Salary" placeholder="Salary"></li>
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+            <li><input type="text" name="Resume" placeholder="Resume"></li>
+            <li><input type="text" name="E-Mail" placeholder="E-mail"></li>
+            <li><input type="text" name="Age" placeholder="Age"></li>
+            <li><button class="button-menu" name="Update" value="UPDATE">UPDATE</li>
+        </ul>
+    </div>
+</div>
+</form>
+<div id="seeComments">
+        <style type="text/css">
+            .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+            .tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+            .tftable tr {background-color:#ffffff;}
+            .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+            .tftable tr:hover {background-color:#ffff99;}
+        </style>
+            
+        <table class="tftable" border="1">
+            <tr><th>Company Name</th><th>Username</th><th>Date</th><th>Work Experience</th><th>Interview Experience</th><th>Company pros</th><th>Company Cons</th></tr>
+            {% if all_comments %}
+            {%for comment in all_comments%} 
+            <tr><td>{{comment.comp_name }} </td><td> {{comment.date }}</td><td>{{comment.time }} </td><td>{{comment.work_experience}} </td><td>{{comment.interview_process}} </td><td>{{comment.company_pros}} </td><td>{{comment.company_cons }}</td></tr>
+            {% endfor %}
+            {% endif %}
+            
+        </table>
+</div>
+
+<div id="makeComment">
+    <div class="select-company">
+            <form action="{% url 'employee' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %} 
+        <p>Select Company: 
+            <select name="company" style="margin-left: 20px; width: 250px;">
+                    {% if hrs %}
+                    {% for hr in hrs %}
+                <option>{{hr.company_name}}</option>
+                {% endfor %}
+                {%endif%}
+            </select>
+            <input type="checkbox" name="anonymous" class="check-box"> Anonymous<br>
+        </p>
+    </div>
+
+    <div class="comment">
+            
+        <p>Work Experience: </p>
+        <textarea name="workexp" maxlength="1000" style="margin: left; width: 500px;" rows: 3; placeholder="Write your comment here..."></textarea>
+        <p>Interview Process: </p>
+        <textarea name="interview" maxlength="1000" style="margin: left; width: 500px;" rows: 3; placeholder="Write your comment here..."></textarea>
+        <p>Company Pros: </p>
+        <textarea name="pros" maxlength="1000" style="margin: left; width: 500px;" rows: 3; placeholder="Write your comment here..."></textarea>
+        <p>Company Cons: </p>
+        <textarea name="cons" maxlength="1000" style="margin: left; width: 500px;" rows: 3; placeholder="Write your comment here..."></textarea>
+    </div>
+
+    <button name= "Submit" style="background-color: #4690fb; color:white; margin-left: 60px;" value="SUBMIT">Submit</button>
+</div>
+</form>
+
+
+<script type="text/javascript">
+	function editProfile() {
+		document.getElementById("edit-Profile").style.display = "block";
+		document.getElementById("seeComments").style.display = "none";
+		document.getElementById("makeComment").style.display = "none";
+		document.getElementById("apply").style.display = "none";
+	}
+	function seeComments(){
+		document.getElementById("edit-Profile").style.display = "none";
+		document.getElementById("seeComments").style.display = "block";
+		document.getElementById("makeComment").style.display = "none";
+		document.getElementById("apply").style.display = "none";
+	}
+	function makeComment(){
+		document.getElementById("edit-Profile").style.display = "none";
+		document.getElementById("seeComments").style.display = "none";
+		document.getElementById("makeComment").style.display = "block";
+		document.getElementById("apply").style.display = "none";
+	}
+	function apply(){
+		document.getElementById("edit-Profile").style.display = "none";
+		document.getElementById("seeComments").style.display = "none";
+		document.getElementById("makeComment").style.display = "none";
+		document.getElementById("apply").style.display = "block";
+	}
+</script>
+
+{% endblock %}

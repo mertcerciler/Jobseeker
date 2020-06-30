@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+
+<img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+
+
+<button class="button-logout" onmousedown="logout()">Logout</button>
+<br>
+<button class="button-menu" onmousedown="editprofile()">Edit Profile</button>
+<button class="button-menu" onmousedown="seecomments()">See Comments</button>
+<button class="button-menu" onmousedown="makecomment()">Make Comment</button>
+<button class="button-menu" onmousedown="apply()">Apply</button>
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+<hr>
+
+
+    <div id= "login-form">
+        <ul class="list">
+            <select name="User Type">
+              <option value="Admin">Admin</option>
+              <option value="HR">HR</option>
+              <option value="Employee">Employee</option>
+              <option value="JobSeeker">JobSeeker</option>
+            </select>
+            <li><input type="text" name="User Name" placeholder="User Name"></li>
+            <li><input type="text" name="Password" placeholder="Password"></li>
+            <li><input type="text" name="Name" placeholder="Name"></li>
+            <li><input type="text" name="Adress" placeholder="Adress"></li>
+            <li><input type="text" name="Phone Number" placeholder="Phone Number"></li>
+        </ul>
+    </div>
+
+    <div id= "login-form2">
+        <ul class="list">
+            <li><input type="text" name="Resume" placeholder="Resume"></li>
+            <li><input type="text" name="E-Mail" placeholder="E-mail"></li>
+            <li><input type="text" name="Age" placeholder="Age"></li>
+            <li><input type="button" name="Update" value="UPDATE"></li>
+        </ul>
+    </div>
+
+
+
+    {% endblock %}

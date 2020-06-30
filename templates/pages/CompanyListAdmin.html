@@ -1,0 +1,195 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+
+   
+<button class="button-logout" onmousedown="logout()">Logout</button>
+<br>
+<button class="button-menu" onmousedown="companyList()">Company List</button>
+<button class="button-menu" onmousedown="userList()">User List</button>
+<button class="button-menu" onmousedown="commentList()">Comment List</button>
+<button class="button-menu" onmousedown="offeringsList()">Offerings List</button>
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+<hr>
+
+{% include 'partials/alerts.html' %}
+    <div id= "company-list">
+        <table style="width: 90%">
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Location</th>
+                    <th>e_mail</th>
+                    <th>Street</th>
+                    <th>Apartment_no</th>
+                    <th>City</th>
+                </tr>
+        {% if hrs %}
+		    {% for hr in hrs %}
+		<tr>
+			<td>{{ hr.id }}</td>
+			<td>{{ hr.company_name }}</td>
+			<td>{{ hr.location }} </td>	
+			<td>{{ hr.e_mail }}</td>
+			<td>{{ hr.street }}</td>
+			<td>{{ hr.apartment_no }}</td>
+			<td>{{ hr.city }}</td>
+		</tr>	
+		    {% endfor %}
+        {% else %}
+         <tr>
+            <td>There is no company in the system</td>
+        </tr>
+    {% endif %}
+    </table>
+        <h1 style="margin-left: 120px; padding-top: 5vh;">Company Table</h1>
+    </div>
+
+    <div id= "user-list">
+        <table style="width: 90%">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>User Type</th>
+                    <th>Password</th>
+                    <th>Name</th>
+                    <th>e-mail</th>
+                    <th>Age</th>
+                </tr>
+            </tr>
+            {% if users %}
+                {% for user1 in users %}
+            <tr>
+                <td>{{ user1.id }}</td>
+                <td>{{ user1.username }}</td>
+                <td>{{ user1.user_type }} </td>	
+                <td>{{ user1.password }}</td>
+                <td>{{ user1.name }}</td>
+                <td>{{ user1.e_mail }}</td>
+                <td>{{ user1.age }}</td>
+            </tr>	
+                {% endfor %}
+        {% endif %}
+
+        
+        <h1 style="margin-left: 120px; padding-top: 5vh;">User Table</h1>
+    </div>
+
+    <div id= "comment-list" style="display: none">
+        
+        <table style="width: 90%; margin-top: 60px" >
+                <tr>
+                    <th>#</th>
+                    <th>Company Name</th>
+                    <th>Username</th>
+                    <th>Date-Time</th>
+                    <th>Work Experience</th>
+                    <th>Interview Experience</th>
+                    <th>Company Pros</th>
+                    <th>Company Cons</th>
+                </tr>
+        {%if all_comments%}
+        {%for comment in all_comments%}
+        {%if comment.hr_request%}
+        <tr>
+            {{counter.incrementCount1}}
+            <td>{{counter.count1}}</td>
+            <td>{{comment.comp_name}}</td>
+            <td>{{comment.date}}</td>
+            <td>{{comment.time}}</td>
+            <td>{{comment.work_experience}}</td>
+            <td>{{comment.interview_process}}</td>
+            <td>{{comment.company_pros}}</td>
+            <td>{{comment.company_cons}}</td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+        </table>
+        <div style="margin: 60px"></div>
+        <form action="{% url 'hr' %}" method="POST">
+                {% csrf_token %} 
+        <select name="delete" style="margin-left: 20px;margin-top: 30px; width: 250px;">
+                {% if all_comments %}
+                {% for comment in all_comments %}
+                {%if comment.hr_request%}
+                {{counter.incrementCount2}}
+                <option>{{ counter.count2 }}</option>
+                {%endif%}
+                {% endfor %}
+                {% endif %}
+               </select>
+               <button name="Delete" class="button-menu" value="requestbutton">DELETE</button>
+            </form>
+            <h1 style="margin-left: 120px; padding-top: 5vh;">Comment Table</h1>
+    </div>
+
+    <div id= "offerings-list" style="display: none">
+        <table style="width: 90%">
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Advertising Date</th>
+                    <th>Closing Date</th>
+                    <th>Description</th>
+                </tr>
+            
+        {% if offering %}
+		{% for offering1 in offering %}
+		<tr>
+			<td>{{ offering1.id }}</td>
+			<td>{{ offering1.name }}</td>
+			<td>{{ offering1.company_name }} </td>	
+			<td>{{ offering1.position }}</td>
+			<td>{{ offering1.salary }}</td>
+			<td>{{ offering1.advertising_date }}</td>
+			<td>{{ offering1.closing_date }}</td>
+			<td class="description">{{ offering1.description }}</td>
+		</tr>	
+		{% endfor %}
+	{% else %}
+	<tr>
+		<td>There is no available offering</td>
+	</tr>
+	{% endif %}
+</table>
+        <h1 style="margin-left: 120px; padding-top: 5vh;">Offerings Table</h1>
+    </div>
+
+<script type="text/javascript">
+    function companyList() {
+        document.getElementById("offerings-list").style.display = "none";
+        document.getElementById("company-list").style.display = "block";
+        document.getElementById("comment-list").style.display = "none";
+        document.getElementById("user-list").style.display = "none";  
+    }
+    function userList(){
+        document.getElementById("offerings-list").style.display = "none";
+        document.getElementById("company-list").style.display = "none";
+        document.getElementById("comment-list").style.display = "none";
+        document.getElementById("user-list").style.display = "block";  
+    }
+    function commentList(){
+        document.getElementById("offerings-list").style.display = "none";
+        document.getElementById("company-list").style.display = "none";
+        document.getElementById("comment-list").style.display = "block";
+        document.getElementById("user-list").style.display = "none";  
+    }
+    function offeringsList(){
+        document.getElementById("offerings-list").style.display = "block";
+        document.getElementById("company-list").style.display = "none";
+        document.getElementById("comment-list").style.display = "none";
+        document.getElementById("user-list").style.display = "none";  
+    }
+   
+</script>
+</body>
+{% endblock %}

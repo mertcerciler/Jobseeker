@@ -1,0 +1,69 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<a href="../"><button class="button-menu">Home Page</button></a>
+<div id = "sign-form" style="display: block;">
+        <ul class="list2">
+            <li><img src="{% static 'img/joker3.jpg' %}" class="joker-img3"></li>
+            <li><h1 style="margin-left: 105px;color: blue;">Sign Up</h1></li>
+            <form action="{% url 'register' %}" method="POST">
+                    {% csrf_token %} 
+                <!-- Alerts -->
+                {% include 'partials/alerts.html' %}
+                <select name="user_type" style= "text-align:center; margin-left: 140px"id="user_type" onchange="usertype()">
+                    <option value="HR">HR</option>
+                    <option value="Employee">Employee</option>
+                    <option value="JobSeeker">JobSeeker</option>
+                </select>
+                <li><input type="text" name="first_name" placeholder="first_name"></li>
+			    <li><input type="text" name="last_name" placeholder="last_name"></li>
+			    <li><input type="text" name="username" placeholder="username"></li>
+                <li><input type="text" name="password" placeholder="password"></li>
+                <li><input type="text" name="password2" placeholder="re-enter password"></li>
+                <li><input type="text" name="email" placeholder="email"></li>
+                <li><input type="text" name="apartment_no" placeholder="apartment_no"></li>
+			    <li><input type="text" name="street" placeholder="street"></li>
+			    <li><input type="text" name="city" placeholder="city"></li>
+			    <li><input type="text" name="zip_code" placeholder="zip_code"></li>
+                <li><input type="text" name="age" placeholder="age"></li>
+                <div id= "hr-register">
+                    <li><input type="text" name="company_name" placeholder="company_name"></li>     
+                </div>
+                <div id= "employee-register">
+                     <li><input type="text" name="position" placeholder="position"></li>   
+                     <li><input type="text" name="salary" placeholder="salary"></li> 
+                     <li><input type="text" name="resume" placeholder="resume"></li>   
+                </div>
+                <div id= "jobseeker-register">
+                    <li><input type="text" name="resume" placeholder="resume"></li>     
+                </div>
+                <li><button style="margin-left: 120px; margin-top: 0px" class="button-menu" name="Sign Up" value="Sign Up">Sign Up</li>
+            </form>
+        </ul>
+        
+</div>
+<script>
+    function usertype(){
+        var user_type =  document.getElementById("user_type");
+        var str_user_type = user_type.options[user_type.selectedIndex].text;
+        if (str_user_type == "HR"){
+            console.log('HR');
+            document.getElementById("hr-register").style.display = "block";
+            document.getElementById("employee-register").style.display = "none";
+            document.getElementById("jobseeker-register").style.display = "none";
+        }
+        if (str_user_type == "Employee"){
+            console.log('Employee');
+            document.getElementById("employee-register").style.display = "block";
+            document.getElementById("hr-register").style.display = "none";
+            document.getElementById("jobseeker-register").style.display = "none";
+        }
+        if (str_user_type == "JobSeeker"){
+            console.log('Jobseeker');
+            document.getElementById("jobseeker-register").style.display = "block";
+            document.getElementById("employee-register").style.display = "none";
+            document.getElementById("hr-register").style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

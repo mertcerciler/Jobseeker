@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+
+<img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+
+
+<button class="button-logout" onmousedown="logout()">Logout</button>
+<br>
+<button class="button-menu" onmousedown="companyList()">Company List</button>
+<button class="button-menu" onmousedown="userList()">User List</button>
+<button class="button-menu" onmousedown="commentList()">Comment List</button>
+<button class="button-menu" onmousedown="offeringsList()">Offerings List</button>
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+<hr>
+
+
+
+    <div id= "reviewComment-list">
+        <button class="button-menu" >Request</button>
+        <button class="button-menu" >Request</button>
+        <button class="button-menu" >Request</button>
+        <button class="button-menu" >Request</button>
+        <h1 style="margin-left: 120px; padding-top: 5vh;">Comment Table</h1>
+    </div>
+
+
+
+<script type="text/javascript">
+ 
+</script>
+
+
+{% endblock %}

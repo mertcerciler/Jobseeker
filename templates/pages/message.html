@@ -1,0 +1,95 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+
+    <img src="{% static 'img/images.jpg' %}" class="joker-img">
+
+    <p class="joker-title"> JOKERS</p>
+    <p class="joker-content"> Company Interview and Employment <br> Review Platform</p>
+    
+    <button class="button-logout" onmousedown="logout()">Logout</button>
+
+<img src="https://i.hizliresim.com/k9VmEJ.jpg" class="message-button"></a>
+
+<div class="split left">
+    <br>
+        <button class="button-menu" onmousedown="inbox()">INBOX</button>
+        <button class="button-menu" onmousedown="deleteButton()">DELETE</button>
+    
+        <header>
+                <h1>Messages</h1>
+              </header>
+              
+              <div class="mailbox">  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                  <div class="message">
+                    <input type="checkbox" />
+                    <span class="sender">cansu</span>
+                    <span class="date">today</span>
+                    <span class="title">hello world</span>
+                  </div>
+                  
+                </div>
+              </div>
+</div>
+      
+<div class="split right">
+    <button class="newMessage-button">NEW MESSAGE</button>    
+        <div class="comment">
+                <p>From: </p>
+                <textarea maxlength="100" style="margin: left; width: 500px;" rows: 3;></textarea>
+                <p>Subject: </p>
+                <textarea maxlength="100" style="margin: left; width: 500px;" rows: 3;></textarea>
+                <p>To: </p>
+                <textarea maxlength="100" style="margin: left; width: 500px;" rows: 3;></textarea>
+                <p>CC: </p>
+                <textarea maxlength="100" style="margin: left; width: 500px;" rows: 3;></textarea>
+                <p>BCC: </p>
+                <textarea maxlength="100" style="margin: left; width: 500px;" rows: 3;></textarea>
+
+                <textarea maxlength="1000" style="margin: left; width: 500px;" rows: 3; placeholder="Write your message here..."></textarea>
+            </div>
+    <button class="send-button">SEND</button>
+</div>
+{% endblock %}
